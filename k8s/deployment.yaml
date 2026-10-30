@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-spring-app
+  namespace: demo-app
+  labels:
+    app: demo-spring-app
+spec:
+  replicas: 2
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: demo-spring-app
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: demo-spring-app
+    spec:
+      containers:
+        - name: demo-spring-app
+          image: DOCKERHUB_USER/demo-spring-app:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: APP_ENV
+              value: production
+            - name: APP_VERSION
+              valueFrom:
+                configMapKeyRef:
+                  name: demo-spring-app-config
+                  key: APP_VERSION
+            - name: JAVA_OPTS
+              value: "-XX:MaxRAMPercentage=75.0 -XX:+UseSerialGC -Xss512k"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 192Mi
+            limits:
+              cpu: 500m
+              memory: 320Mi
+          startupProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: http
+            periodSeconds: 5
+            failureThreshold: 30
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: http
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: http
+            periodSeconds: 10

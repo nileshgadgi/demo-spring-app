@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-spring-app
+  namespace: demo-app
+  labels:
+    app: demo-spring-app
+spec:
+  type: NodePort
+  selector:
+    app: demo-spring-app
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+      nodePort: 30080
