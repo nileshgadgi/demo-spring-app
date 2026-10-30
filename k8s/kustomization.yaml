@@ -10,8 +10,8 @@ configMapGenerator:
   - name: demo-spring-app-config
     namespace: demo-app
     literals:
-      - APP_VERSION=3fa715d
+      - APP_VERSION=2c9e093
 
 images:
   - name: nileshgadgi/demo-spring-app
-    newTag: 3fa715d
+    newTag: 2c9e093
