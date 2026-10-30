@@ -13,5 +13,5 @@ configMapGenerator:
       - APP_VERSION=latest
 
 images:
-  - name: DOCKERHUB_USER/demo-spring-app
+  - name: nileshgadgi/demo-spring-app
     newTag: latest

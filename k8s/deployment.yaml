@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: demo-spring-app
-          image: DOCKERHUB_USER/demo-spring-app:latest
+          image: nileshgadgi/demo-spring-app:latest
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
