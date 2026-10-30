@@ -1,0 +1,12 @@
+target/
+.git/
+.github/
+.idea/
+.vscode/
+*.iml
+k8s/
+argocd/
+screenshots/
+*.md
+*.log
+.env
