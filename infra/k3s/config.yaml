@@ -1,0 +1,8 @@
+write-kubeconfig-mode: "0644"
+disable:
+  - traefik
+  - servicelb
+  - metrics-server
+kubelet-arg:
+  - "system-reserved=memory=200Mi"
+  - "eviction-hard=memory.available<100Mi"

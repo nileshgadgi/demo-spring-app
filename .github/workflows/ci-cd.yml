@@ -6,6 +6,7 @@ on:
     paths-ignore:
       - "k8s/**"
       - "argocd/**"
+      - "infra/**"
       - "screenshots/**"
       - "**.md"
   pull_request:
